@@ -53,34 +53,50 @@ about the currently validated user
 */
 passport.use(new LocalStrategy( function verify (username, password, callback) {
     dao.getUser(username, password).then((user) => {
-
         if(!user)
-            return callback(null, false, {
-        message: 'Incorrect username and/or password.' });
-        
+            return callback(null, false, { message: 'Incorrect username and/or password.' });
+
         return callback(null, user);
     });
 }));
 
+/* Fra chat
 passport.serializeUser((user, done) => {
   done(null, user.id);
-});
+});*/
 
-passport.deserializeUser((id, done) => {
+/* Fra chat
+passport.deserializeUser((id, cb) => {
   db.get('SELECT * FROM users WHERE id = ?', [id], (err, user) => {
     done(err, user);
   });
+});*/
+
+passport.serializeUser((user, cb) => { // cb = callback
+  cb(null, user); // {id: user.id, email:user.username, name: user.name}
 });
 
-// Define routes
+passport.deserializeUser((user, cb) => {
+  return cb(null, user);
+});
+
+/////////////// Define Express routes ///////////////////
+// Login
 app.post('/api/login', passport.authenticate('local'), (req, res) => {
-  res.send(req.user);
+  // res.send(req.user); // Chat
+  // This function is called if authentication is successful.
+  // req.user contains the authenticated user.
+  res.json(req.user.username); // Send an object by serializiing it into JSON
 });
 
+// Logout
 app.post('/api/logout', (req, res) => {
-  req.logout();
-  res.sendStatus(200);
+  req.logout(() => { res.end();
+  });
+  // res.sendStatus(200); // Chat
 });
+
+
 
 app.get('/api/memes', (req, res) => {
   // Implement API to get random meme and captions
