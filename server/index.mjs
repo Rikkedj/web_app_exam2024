@@ -10,7 +10,7 @@ import sqlite3 from 'sqlite3';
 
 const app = express(); // creates an application object app
 const port = 3001;
-const db = new sqlite3.Database('./database.sqlite');
+//const db = new sqlite3.Database('./database.sqlite');
 
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(bodyParser.json());
@@ -91,7 +91,8 @@ app.post('/api/login', passport.authenticate('local'), (req, res) => {
 
 // Logout
 app.post('/api/logout', (req, res) => {
-  req.logout(() => { res.end();
+  req.logout(() => { 
+    res.end();
   });
   // res.sendStatus(200); // Chat
 });

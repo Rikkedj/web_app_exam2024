@@ -13,10 +13,26 @@
   - request parameters and request body content
   - response body content
 - POST `/api/logout`
+- POST `/api/game` 
+{
+  "id" : id,
+  ""
 
-- GET `/api/something`
+}
+- POST `/users/games/round`
+
+- GET `/api/games/:gameID/rounds/:roundID/meme`
   - request parameters
   - response body content
+
+- GET `/api/rounds/:roundID/meme`
+
+- GET `/api/rounds/:roundID/captions`
+
+- POST ``
+
+- GET `/api/games/:gameID/rounds/:roundID`
+
 - POST `/api/something`
   - request parameters and request body content
   - response body content
