@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL,  -- This column stores the bcrypt hashed password
+    hashed_password TEXT NOT NULL,  -- This column stores the bcrypt hashed password
     email TEXT UNIQUE NOT NULL
 );
 
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS memes (
 
 CREATE TABLE IF NOT EXISTS captions (
     caption_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    text TEXT NOT NULL
+    caption_text TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS meme_captions (
@@ -54,3 +54,18 @@ CREATE TABLE IF NOT EXISTS round_captions (
     FOREIGN KEY (caption_id) REFERENCES captions (caption_id),
     PRIMARY KEY (round_id, caption_id)
 );
+
+-- MAKE USERS
+INSERT OR IGNORE INTO users (user_id, username, hashed_password, email) VALUES (1, 'Rikke','password123', 'rikke@example.com');
+
+
+-- INSERT MEMES
+INSERT OR IGNORE INTO memes (meme_id, image_path, used_in_game) VALUES (1, '../client/assets/yes_boy.jpeg', 0);
+-- INSERT CAPTIONS
+INSERT OR IGNORE INTO captions (caption_id, caption_text) VALUES (1, 'When you finally finish a challenging level in a video game.');
+INSERT OR IGNORE INTO captions (caption_id, caption_text) VALUES (2, 'When you ace the exam everyone said was impossible.');
+INSERT OR IGNORE INTO captions (caption_id, caption_text) VALUES (3, 'When you realize you left your homework at home.');
+INSERT OR IGNORE INTO captions (caption_id, caption_text) VALUES (4, 'When you get your favorite ice cream flavor.');
+INSERT OR IGNORE INTO captions (caption_id, caption_text) VALUES (5, 'When your mom tells you to clean your room.');
+
+

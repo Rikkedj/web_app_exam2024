@@ -8,6 +8,7 @@ import cors from 'cors';
 import { Strategy as LocalStrategy } from 'passport-local'; // For passport (authentication)
 import sqlite3 from 'sqlite3';
 
+
 const app = express(); // creates an application object app
 const port = 3001;
 //const db = new sqlite3.Database('./database.sqlite');
