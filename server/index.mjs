@@ -6,12 +6,15 @@ import passport from 'passport'; // authentication
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { Strategy as LocalStrategy } from 'passport-local'; // For passport (authentication)
-import sqlite3 from 'sqlite3';
+import { db } from './create_database.mjs';
 
 
 const app = express(); // creates an application object app
 const port = 3001;
 //const db = new sqlite3.Database('./database.sqlite');
+app.use(express.static('client/public'))
+
+
 
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(bodyParser.json());

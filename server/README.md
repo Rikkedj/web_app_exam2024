@@ -13,12 +13,32 @@
   - request parameters and request body content
   - response body content
 - POST `/api/logout`
-- POST `/api/game` 
-{
-  "id" : id,
-  ""
+- POST `/api/start-game` 
+Response body:
+[{
+  "gameId": "1234",
+  "round": 1,
+  "meme": {
+    "id": "meme1",
+    "url": "https://example.com/meme1.jpg"
+  },
+  "captions": [
+    { "id": "caption1", "text": "Correct caption 1" },
+    { "id": "caption2", "text": "Correct caption 2" },
+    { "id": "caption3", "text": "Incorrect caption 1" },
+    { "id": "caption4", "text": "Incorrect caption 2" },
+    { "id": "caption5", "text": "Incorrect caption 3" },
+    { "id": "caption6", "text": "Incorrect caption 4" },
+    { "id": "caption7", "text": "Incorrect caption 5" }
+  ],
+  "score": 0
+}]
+# Fetching next round
+Request:
+- GET `/api/next-round?gameId=1234`
 
-}
+# Submit a vote
+- POST ``
 - POST `/users/games/round`
 
 - GET `/api/games/:gameID/rounds/:roundID/meme`

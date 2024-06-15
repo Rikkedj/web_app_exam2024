@@ -68,4 +68,3 @@ INSERT OR IGNORE INTO captions (caption_id, caption_text) VALUES (3, 'When you r
 INSERT OR IGNORE INTO captions (caption_id, caption_text) VALUES (4, 'When you get your favorite ice cream flavor.');
 INSERT OR IGNORE INTO captions (caption_id, caption_text) VALUES (5, 'When your mom tells you to clean your room.');
 
-
