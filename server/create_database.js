@@ -1,10 +1,15 @@
-const sqlite3 = require('sqlite3').verbose();
-const fs = require('fs');
-const path = require('path');
+import sqlite3 from 'sqlite3';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Read the SQL schema from the file
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const schemaPath = path.join(__dirname, 'generate_database.sql');
 const schema = fs.readFileSync(schemaPath, 'utf-8');
+// const schema = fs.readFileSync(./server/generate_database.sql, 'utf-8');
 
 // Connect to the database (will create a new file if it doesn't exist)
 const dbPath = path.join(__dirname, 'meme_game.sqlite');
@@ -24,4 +29,4 @@ db.serialize(() => {
 });
 
 // Close the database connection
-db.close();
+// db.close();
