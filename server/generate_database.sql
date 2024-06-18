@@ -1,58 +1,69 @@
 CREATE TABLE IF NOT EXISTS users (
-    user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE NOT NULL,
     hashed_password TEXT NOT NULL,  -- This column stores the bcrypt hashed password
     email TEXT UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS memes (
-    meme_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     image_path TEXT NOT NULL,
     used_in_game BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS captions (
-    caption_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     caption_text TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS meme_captions (
-    meme_id INTEGER,
+    id INTEGER,
     caption_id INTEGER,
     is_best_match BOOLEAN,
     FOREIGN KEY (meme_id) REFERENCES memes (meme_id),
-    FOREIGN KEY (caption_id) REFERENCES captions (caption_id),
+    FOREIGN KEY (caption_id) REFERENCES captions (caption_1id),
     PRIMARY KEY (meme_id, caption_id)
 );
 
 CREATE TABLE IF NOT EXISTS games (
-    game_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    player INTEGER,
+    round1 TEXT,
+    round2 TEXT,
+    round3 TEXT,
     total_score INTEGER DEFAULT 0,
     completed BOOLEAN DEFAULT 0,
-    start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users (user_id)
+    --start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    --FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
 CREATE TABLE IF NOT EXISTS rounds (
-    round_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     game_id INTEGER,
     meme_id INTEGER,
-    selected_caption_id INTEGER,
+    caption1 TEXT NOT NULL,
+    caption2 TEXT NOT NULL,
+    caption3 TEXT NOT NULL,
+    caption4 TEXT NOT NULL,
+    caption5 TEXT NOT NULL,
+    caption6 TEXT NOT NULL,
+    caption7 TEXT NOT NULL,
+    answer INTEGER,
     score INTEGER DEFAULT 0,
-    round_number INTEGER,
-    end_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (game_id) REFERENCES games (game_id),
-    FOREIGN KEY (meme_id) REFERENCES memes (meme_id),
-    FOREIGN KEY (selected_caption_id) REFERENCES captions (caption_id)
+    --selected_caption_id INTEGER,
+    --round_number INTEGER,
+    --FOREIGN KEY (game_id) REFERENCES games (game_id),
+    --FOREIGN KEY (meme_id) REFERENCES memes (meme_id),
+    --FOREIGN KEY (selected_caption_id) REFERENCES captions (caption_id)
 );
 
 CREATE TABLE IF NOT EXISTS round_captions (
+    id INTEGER, 
     round_id INTEGER,
     caption_id INTEGER,
-    FOREIGN KEY (round_id) REFERENCES rounds (round_id),
-    FOREIGN KEY (caption_id) REFERENCES captions (caption_id),
-    PRIMARY KEY (round_id, caption_id)
+    --FOREIGN KEY (round_id) REFERENCES rounds (round_id),
+    --FOREIGN KEY (caption_id) REFERENCES captions (caption_id),
+    --PRIMARY KEY (round_id, caption_id)
 );
 
 -- MAKE USERS
